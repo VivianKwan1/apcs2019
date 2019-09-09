@@ -93,6 +93,11 @@ public class Calculate {
 		}
 	}
 	
+	//mult 100, add.5, cast int, div 100
+	public static double round2(double num) {
+		return ((int) (num * 100 + 0.5)/100);
+	}
+	
 	//returns result of number and exponent
 	public static double exponent(double base, int exponent) {
 		double result = 1;

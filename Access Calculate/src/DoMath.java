@@ -5,7 +5,7 @@
 public class DoMath {
 
 	public static void main(String[] args) {
-		System.out.println(Calculate.discriminant(5, 2, 5));
+		System.out.println(Calculate.round2(5.214123));
 
 	}
 
