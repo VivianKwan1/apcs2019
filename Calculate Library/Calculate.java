@@ -40,14 +40,32 @@ public class Calculate {
 	}
 	
 	//converts mixed number to improper fraction
-	public String toImproperFrac(int whole, int numer, int denom) {
+	public static String toImproperFrac(int whole, int numer, int denom) {
 		int newnumer = whole * denom + numer;
 //		String mixed = newnumer + "/" + denom;
 		return Integer.toString(newnumer) + "/" + Integer.toString(denom);
 	}
 	
+	//converts improper fraction to a mixed number
+	public static String toMixedNum(int num1, int num2) {
+		int numer = num1 % num2;
+		int wholeNum = num1 / num2;
+		return Integer.toString(wholeNum) + "_" + Integer.toString(numer) + "/" + Integer.toString(num2);
+	}
+	
+	//foils a binomial
+	public static String foil(int num1, int num2, int num3, int num4, String var) {
+		int a = num1 * num3;
+		int b = num1 * num4 + num2 * num3;
+		int c = num4 * num2;
+		return Integer.toString(a) + var + "^2 + " + Integer.toString(b) + var + " + " + Integer.toString(c);
+	}
+	
 	//checks if a number is divisible by another
 	public static boolean isDivisibleBy(int dividend, int divisor) {
+		if (divisor == 0) {
+			throw new IllegalArgumentException("Cannot divide by 0.");
+		}
 		if (dividend % divisor == 0) {
 			return true;
 		}else {
@@ -93,17 +111,72 @@ public class Calculate {
 		}
 	}
 	
-	//mult 100, add.5, cast int, div 100
+	//rounds to two decimal places
 	public static double round2(double num) {
-		return ((int) (num * 100 + 0.5)/100);
+		num = num * 100 + 0.5;
+		double numInt = (int) num;
+		return numInt/100;
 	}
 	
 	//returns result of number and exponent
 	public static double exponent(double base, int exponent) {
+		if (exponent < 0) {
+			throw new IllegalArgumentException("Cannot compute negative exponent.");
+		}
 		double result = 1;
 		for (int i = 0; i < exponent; i++) {
 			result *= base;
 		}
 		return result;
+	}
+	
+	//returns factorial of number
+	public static int factorial(int num) {
+		if (num < 0) {
+			throw new IllegalArgumentException("Cannot compute factorial of negative numbers.");
+		}
+		for (int i = num - 1; i > 1; i--) {
+			num *= i;
+		}
+		return num;
+	}
+	
+	//says whether number is prime or not
+	public static boolean isPrime(int num) {
+		for (int i = num -1; i > 1; i--) {
+			if (isDivisibleBy(num, i)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	//finds greatest common factor
+	public static int gcf(int num1, int num2) {
+		for (int i = min(num1, num2); i > 1; i--) {
+			if (isDivisibleBy(num1, i)) {
+				if (isDivisibleBy(num2, i)) {
+					return i;
+				}
+			}
+		}
+		return 1;
+	}
+	
+	//finds approximate square root
+	public static double sqrt(double num) {
+		if (num < 0) {
+			throw new IllegalArgumentException("Cannot compute square root of negative numbers.");
+		}
+		double sqrt = 0;
+		while (sqrt * sqrt - num > 0.005 || sqrt * sqrt - num < -0.005) {
+			sqrt += 0.00001;
+		}
+		return round2(sqrt);
+	}
+	
+	//approximate real roots of quadratic equation
+	public static String quadForm(int a, int b, int c) {
+		
 	}
 }
