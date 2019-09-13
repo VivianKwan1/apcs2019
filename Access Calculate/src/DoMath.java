@@ -5,7 +5,7 @@
 public class DoMath {
 
 	public static void main(String[] args) {
-		System.out.println(Calculate.sqrt(122));
+		System.out.println(Calculate.quadForm(1, -5, -7));
 
 	}
 

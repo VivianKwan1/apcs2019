@@ -48,6 +48,7 @@ public class Calculate {
 	
 	//converts improper fraction to a mixed number
 	public static String toMixedNum(int num1, int num2) {
+		if (num2 == 0) throw new IllegalArgumentException("Cannot divide by 0");
 		int numer = num1 % num2;
 		int wholeNum = num1 / num2;
 		return Integer.toString(wholeNum) + "_" + Integer.toString(numer) + "/" + Integer.toString(num2);
@@ -63,9 +64,7 @@ public class Calculate {
 	
 	//checks if a number is divisible by another
 	public static boolean isDivisibleBy(int dividend, int divisor) {
-		if (divisor == 0) {
-			throw new IllegalArgumentException("Cannot divide by 0.");
-		}
+		if (divisor == 0) throw new IllegalArgumentException("Cannot divide by 0.");
 		if (dividend % divisor == 0) {
 			return true;
 		}else {
@@ -120,9 +119,7 @@ public class Calculate {
 	
 	//returns result of number and exponent
 	public static double exponent(double base, int exponent) {
-		if (exponent < 0) {
-			throw new IllegalArgumentException("Cannot compute negative exponent.");
-		}
+		if (exponent < 0) throw new IllegalArgumentException("Cannot compute negative exponent.");
 		double result = 1;
 		for (int i = 0; i < exponent; i++) {
 			result *= base;
@@ -132,9 +129,7 @@ public class Calculate {
 	
 	//returns factorial of number
 	public static int factorial(int num) {
-		if (num < 0) {
-			throw new IllegalArgumentException("Cannot compute factorial of negative numbers.");
-		}
+		if (num < 0) throw new IllegalArgumentException("Cannot compute factorial of negative numbers.");
 		for (int i = num - 1; i > 1; i--) {
 			num *= i;
 		}
@@ -165,9 +160,7 @@ public class Calculate {
 	
 	//finds approximate square root
 	public static double sqrt(double num) {
-		if (num < 0) {
-			throw new IllegalArgumentException("Cannot compute square root of negative numbers.");
-		}
+		if (num < 0) throw new IllegalArgumentException("Cannot compute square root of negative numbers.");
 		double sqrt = 0;
 		while (sqrt * sqrt - num > 0.005 || sqrt * sqrt - num < -0.005) {
 			sqrt += 0.00001;
@@ -177,6 +170,16 @@ public class Calculate {
 	
 	//approximate real roots of quadratic equation
 	public static String quadForm(int a, int b, int c) {
-		
+		if (discriminant(a, b, c) < 0) {
+			return "No real roots";
+		} else {
+			double root1 = (-b + sqrt(discriminant(a, b, c)))/(2 * a);
+			double root2 = (-b - sqrt(discriminant(a, b, c)))/(2 * a);
+			if (root1 == root2) {
+				return Double.toString(round2(root1));
+			} else {
+				return (Double.toString(round2(root1)) + " and " + Double.toString(round2(root2)));
+			}
+		}
 	}
 }
