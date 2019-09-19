@@ -9,6 +9,10 @@ public class Calculate {
 		return num * num;
 	}
 	
+	public static double square(double num) {
+		return num * num;
+	}
+	
 	//cubes a number
 	public static int cube(int num) {
 		return num * num * num;
@@ -47,18 +51,18 @@ public class Calculate {
 	}
 	
 	//converts improper fraction to a mixed number
-	public static String toMixedNum(int num1, int num2) {
-		if (num2 == 0) throw new IllegalArgumentException("Cannot divide by 0");
-		int numer = num1 % num2;
-		int wholeNum = num1 / num2;
-		return Integer.toString(wholeNum) + "_" + Integer.toString(numer) + "/" + Integer.toString(num2);
+	public static String toMixedNum(int numer, int denom) {
+		if (denom == 0) throw new IllegalArgumentException("Cannot divide by 0");
+		int newNumer = numer % denom;
+		int wholeNum = numer / denom;
+		return Integer.toString(wholeNum) + "_" + Integer.toString(newNumer) + "/" + Integer.toString(denom);
 	}
 	
 	//foils a binomial
-	public static String foil(int num1, int num2, int num3, int num4, String var) {
-		int a = num1 * num3;
-		int b = num1 * num4 + num2 * num3;
-		int c = num4 * num2;
+	public static String foil(int coeff1, int num1, int coeff2, int num2, String var) {
+		int a = coeff1 * coeff2;
+		int b = coeff1 * num2 + num1 * coeff2;
+		int c = num2 * num1;
 		return Integer.toString(a) + var + "^2 + " + Integer.toString(b) + var + " + " + Integer.toString(c);
 	}
 	

@@ -13,7 +13,8 @@ public class QuadraticClient {
 		double b = num.nextDouble();
 		System.out.println("Enter a value for c.");
 		double c = num.nextDouble();
-		quadrDescriber(a, b, c);
+		Quadratic.quadrDescriber(a, b, c);
+		num.close();
 	}
 
 }
