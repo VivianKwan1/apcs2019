@@ -4,11 +4,12 @@
 //library of math functions
 
 public class Calculate {
-	//squares a number
+	//squares int
 	public static int square(int num) {
 		return num * num;
 	}
 	
+	//squares double 
 	public static double square(double num) {
 		return num * num;
 	}
@@ -172,8 +173,23 @@ public class Calculate {
 		return round2(sqrt);
 	}
 	
-	//approximate real roots of quadratic equation
+	//approximate real roots of quadratic equation with ints
 	public static String quadForm(int a, int b, int c) {
+		if (discriminant(a, b, c) < 0) {
+			return "No real roots";
+		} else {
+			double root1 = (-b + sqrt(discriminant(a, b, c)))/(2 * a);
+			double root2 = (-b - sqrt(discriminant(a, b, c)))/(2 * a);
+			if (root1 == root2) {
+				return Double.toString(round2(root1));
+			} else {
+				return (Double.toString(round2(root1)) + " and " + Double.toString(round2(root2)));
+			}
+		}
+	}
+	
+	//approximate real roots of quadratic equation with doubles
+	public static String quadForm(double a, double b, double c) {
 		if (discriminant(a, b, c) < 0) {
 			return "No real roots";
 		} else {

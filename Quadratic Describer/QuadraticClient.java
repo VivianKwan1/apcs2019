@@ -6,15 +6,23 @@
 import java.util.Scanner;
 public class QuadraticClient {
 	public static void main(String[] args) {
-		Scanner num = new Scanner(System.in);
-		System.out.println("Enter a value for a.");
-		double a = num.nextDouble();
-		System.out.println("Enter a value for b.");
-		double b = num.nextDouble();
-		System.out.println("Enter a value for c.");
-		double c = num.nextDouble();
-		Quadratic.quadrDescriber(a, b, c);
-		num.close();
+		boolean repeat = true;
+			while (repeat) {
+			Scanner input = new Scanner(System.in);
+			System.out.println("a: ");
+			double a = input.nextDouble();
+			System.out.println("b: ");
+			double b = input.nextDouble();
+			System.out.println("c: ");
+			double c = input.nextDouble();
+			System.out.println(Quadratic.quadrDescriber(a, b, c));
+			System.out.println("Continue? (enter \"quit\" to exit.)");
+			String keepGoing = input.next();
+			if (keepGoing.equals("quit")) {
+				repeat = false;
+			}
+			input.close();
+		}
 	}
 
 }
