@@ -12,11 +12,23 @@ public class QuadraticClient {
 		while (repeat) {
 			System.out.println("Welcome to Quadratic Describer.\nPlease input some numbers for coefficients a, b, and c.\n");
 			System.out.print("a: ");
-			String a = input.next();
+			while(!(input.hasNextDouble())) {
+				System.out.print("That is not a number. Please try again. ");
+				input.next();
+			}
+			double a = input.nextDouble();
 			System.out.print("b: ");
-			String b = input.next();
+			while(!(input.hasNextDouble())) {
+				System.out.print("That is not a number. Please try again. ");
+				input.next();
+			}
+			double b = input.nextDouble();
 			System.out.print("c: ");
-			String c = input.next();
+			while(!(input.hasNextDouble())) {
+				System.out.print("That is not a number. Please try again. ");
+				input.next();
+			}
+			double c = input.nextDouble();
 			
 			System.out.println(Quadratic.quadrDescriber(a, b, c));
 			System.out.println("Continue? (enter \"quit\" to exit.)");
