@@ -1,5 +1,8 @@
 //Vivian Kwan
-//
+//APCS Period 3
+//October 2, 2019
+//Returns min, max, sum of even numbers, and largest even number from a set of numbers provided by the user
+
 import java.util.*;
 public class ProcessingNumbers {
 	public static void main(String[] args) {
