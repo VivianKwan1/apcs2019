@@ -9,12 +9,17 @@ public class ProcessingNumbers {
 		Scanner input = new Scanner(System.in);
 		System.out.println("How many numbers would you like to input?");
 		int runs = input.nextInt();
+		while(runs <= 0) {
+			System.out.println("Please input a number greater than 0.");
+			runs = input.nextInt();
+		}
 		System.out.println("1:");
 		int num = input.nextInt();
 		int max = num;
 		int min = num;
 		int evenMax = -1000000000;
 		int evenSum = 0;
+		int evenNums = 0;
 		if (num % 2 == 0) {
 			evenSum = num;
 		}
@@ -28,6 +33,7 @@ public class ProcessingNumbers {
 			}
 			if (num % 2 == 0) {
 				evenSum += num;
+				evenNums += 1;
 				if (num > evenMax) {
 					evenMax = num;
 				}
@@ -35,9 +41,12 @@ public class ProcessingNumbers {
 		}
 		System.out.println("Smallest Number: " + min);
 		System.out.println("Largest Number: " + max);
-		System.out.println("Sum of Even Numbers: " + evenSum);
-		System.out.println("Largest Even Number: " + evenMax);
+		if (evenNums == 0) {
+			System.out.println("No even numbers. ");
+		} else {
+			System.out.println("Sum of Even Numbers: " + evenSum);
+			System.out.println("Largest Even Number: " + evenMax);
+		}
 		input.close();
 	}
-
 }
