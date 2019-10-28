@@ -6,27 +6,40 @@
 import java.util.*;
 public class Split {
 	public static void main(String[] args) {
-		System.out.println("no");
+		System.out.println(sandwich("applespineapplesbreadlettucetomatobaconmayohambreadcheese"));
 	}
-	public static String[] split(String sp) {
-		String base = "I really like really red apples!";
-// Your task Part 0
-		int start = 0;
-		int arrLen = 0;
-//		String substring = "";
-		for (int i = start; i < base.length(); i++) {
-			boolean correct = true;
-			for (int j = 0; j < sp.length(); j++) {
-				if (base.charAt(j)!=(sp.charAt(j))) {
-					correct = false;
-				}
-			}
-			if (correct) {
-				arrLen++;
-			}
-		}
-		String[] returning = new String[arrLen];
-		return returning;
+//	public static String[] split(String sp) {
+//		String base = "I really like really red apples!";
+//// Your task Part 0
+//		int start = 0;
+//		int arrLen = 0;
+////		String substring = "";
+//		for (int i = start; i < base.length(); i++) {
+//			boolean correct = true;
+//			for (int j = 0; j < sp.length(); j++) {
+//				if (base.charAt(j)!=(sp.charAt(j))) {
+//					correct = false;
+//				}
+//			}
+//			if (correct) {
+//				arrLen++;
+//			}
+//		}
+//		String[] returning = new String[arrLen];
+//		for (int i = start; i < base.length(); i++) {
+//			boolean correct = true;
+//			for (int j = 0; j < sp.length(); j++) {
+//				if (base.charAt(j)!=(sp.charAt(j))) {
+//					correct = false;
+//				}
+//			}
+//			int nextSpot = 0;
+//			if (correct) {
+//				returning[nextSpot] = base.substring(start, i);
+//				nextSpot++;
+//			}
+//		}
+//		return returning;
 //String.split();
 
 //It's a method that acts on a string, <StringName>.split(<sp>);
@@ -65,8 +78,24 @@ public class Split {
 
 */
 
+	public static String sandwich(String sandwich) {
+		if (sandwich.split("bread").length < 2) {
+			return "Not a sandwich";
+		}
+		String inside = sandwich.substring(sandwich.indexOf("bread") + 5);
+		while(!inside.endsWith("bread")) {
+			inside = inside.substring(0, inside.length() - 1);
+		}
+		return inside;
+	}
 //Your task pt 2:
 
+	public static String sandwichSpace(String sandwich) {
+		if (sandwich.split("bread").length < 2) {
+			return "Not a sandwich";
+		}
+		String inside = sandwich.substring(sandwich.indexOf("bread") + 5);
+	}
 /*Write a method that take in a string like
 
 * "apples pineapples bread lettuce tomato bacon mayo ham bread cheese"
@@ -81,6 +110,6 @@ public class Split {
 
 */
 
- }
-
 }
+
+
