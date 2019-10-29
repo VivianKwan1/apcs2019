@@ -86,6 +86,7 @@ public class Split {
 		while(!inside.endsWith("bread")) {
 			inside = inside.substring(0, inside.length() - 1);
 		}
+		inside = inside.substring(0, inside.length() - 5);
 		return inside;
 	}
 //Your task pt 2:
@@ -94,7 +95,17 @@ public class Split {
 		if (sandwich.split("bread").length < 2) {
 			return "Not a sandwich";
 		}
-		String inside = sandwich.substring(sandwich.indexOf("bread") + 5);
+		String inside = sandwich.substring(sandwich.indexOf("bread") + 6);
+		while(!inside.endsWith("bread")) {
+			inside = inside.substring(0, inside.length() - 1);
+		}
+		inside = inside.substring(0, inside.length() - 6);
+		String[] insideArr = new String[inside.split(" ").length];
+		String insideReturn = "";
+		for (int i = 0; i < insideArr.length; i++) {
+			insideReturn += insideArr[i] + " ";
+		}
+		return insideReturn;
 	}
 /*Write a method that take in a string like
 
