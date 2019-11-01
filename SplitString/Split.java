@@ -3,7 +3,7 @@
 //October 21, 2019
 //splits a string at a given word
 //returns ingredients of a "sandwich"
-import java.util.*;
+
 public class Split {
 	public static void main(String[] args) {
 		System.out.println(sandwich("applespineapplesbreadlettucetomatobaconmayohambreadcheese"));
