@@ -40,22 +40,27 @@ public class FracCalc {
         } else {
         	result = simplify(divide(fracNumbers(splitEx)));
         }
-//		int[] numAndDenom = fracNumbers(splitEx);
-//    	return splitEx[splitEx.length-1];
 		return result;
-//		return Arrays.toString(fracNumbers(splitEx));
     }
     
     public static int[] fracNumbers (String[] frac) {
     	int[] numAndDenoms = new int[frac.length + 1];
     	for (int i = 0; i < frac.length; i+=2){
-        	System.out.println(Arrays.toString(numAndDenoms));
-
+        	System.out.println(Arrays.toString(frac));
     		if (frac[i].indexOf("/")!=-1) {
     			String[] splitFrac = frac[i].split("/");
     			if (splitFrac[0].indexOf("_") != -1) {
         			String[] mixedNumSplit = splitFrac[0].split("_");
-        			splitFrac[0] = Integer.toString(Integer.parseInt(mixedNumSplit[0]) * Integer.parseInt(frac[2]) + Integer.parseInt(mixedNumSplit[2]));
+        			int wholeNum = Integer.parseInt(mixedNumSplit[0]);
+        			String[] splitMixedFrac = frac[i].split("/");
+        			String numer = mixedNumSplit[1];
+        			String denom = splitMixedFrac[1];
+        			if (wholeNum < 0) {
+            			splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) - Integer.parseInt(numer));
+        			} else {
+        				splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) + Integer.parseInt(numer));
+    			
+        			}
     			}
     			numAndDenoms[i] = Integer.parseInt(splitFrac[0]);
     			numAndDenoms[i+1] = Integer.parseInt(splitFrac[1]);
@@ -74,7 +79,7 @@ public class FracCalc {
     	int numer1 = operands[0];
     	int denom1 = operands[1];
     	int numer2 = operands[2];
-    	int denom2 = operands[3];
+    	int denom2 = operands[3];	
     	int commonDenom = denom1 * denom2;
     	int numer = (denom2 * numer1) + (denom1 * numer2);
     	int[] newFrac = {numer, commonDenom};
@@ -114,6 +119,13 @@ public class FracCalc {
     public static String simplify (int[] impropFrac) {
     	int numer = impropFrac[0];
     	int denom = impropFrac[1];
+    	int smallerNum = Math.min(Math.abs(numer), Math.abs(denom));
+    	for (int i = smallerNum; i > 0; i--) {
+    		if (numer % i == 0 && denom % i == 0) {
+    			numer /= i;
+    			denom /= i;
+    		}
+    	}
     	if (denom == 1) {
     		return Integer.toString(numer);
     	} else if (numer % denom == 0) {
