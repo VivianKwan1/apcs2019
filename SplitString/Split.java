@@ -73,7 +73,6 @@ public class Split {
 		String insideReturn = "";
 		for (int i = 0; i < insideArr.length; i++) {
 			insideReturn += insideArr[i];
-			insideReturn += " ";
 		}
 		return insideReturn;
 	}
