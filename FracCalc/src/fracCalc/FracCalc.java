@@ -35,7 +35,7 @@ public class FracCalc {
         	result = simplify(add(fracNumbers(splitEx)));
         } else if (splitEx[1].equals("-")) {
         	result = simplify(subtract(fracNumbers(splitEx)));
-        } else if (splitEx[1] == ("*")) {
+        } else if (splitEx[1].equals("*")) {
         	result = simplify(multiply(fracNumbers(splitEx)));
         } else {
         	result = simplify(divide(fracNumbers(splitEx)));
@@ -83,7 +83,6 @@ public class FracCalc {
     	int commonDenom = denom1 * denom2;
     	int numer = (denom2 * numer1) + (denom1 * numer2);
     	int[] newFrac = {numer, commonDenom};
-    	System.out.println(Arrays.toString(newFrac));
     	return newFrac;
     }
     
@@ -113,6 +112,7 @@ public class FracCalc {
     	int numer2 = operands[2];
     	int denom2 = operands[3];
     	int[] newFrac = {numer1 * denom2, numer2 * denom1};
+    	System.out.println(Arrays.toString(newFrac));
     	return newFrac;
     }
     
@@ -130,10 +130,11 @@ public class FracCalc {
     		return Integer.toString(numer);
     	} else if (numer % denom == 0) {
     		return Integer.toString(numer/denom);
-    	} else if (numer > denom) {
-    		return (numer/denom + "_" + numer%denom + "/" + denom);
+    	} else if (Math.abs(numer) > Math.abs(denom)) {
+    		System.out.println(numer + denom);
+    		return (numer/denom + "_" + Math.abs(numer%denom) + "/" + Math.abs(denom));
     	} else {
-    		return numer + "/" + denom;
+    		return numer + "/" + Math.abs(denom);
     	}
     }
     // TODO: Fill in the space below with any helper methods that you think you will need
