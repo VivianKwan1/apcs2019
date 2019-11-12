@@ -12,9 +12,11 @@ public class FracCalc {
         	String expression = input.nextLine();
     		if (expression.equals("quit")) {
     			repeat = false;
-    		} else {
+    		} else if (!produceAnswer(expression).equals("error")){
     			System.out.println(produceAnswer(expression));
-    		}
+    		} else {
+    			System.out.println("Error: Invalid Input");
+    		} 
        	}
     	input.close();
     }
@@ -30,27 +32,72 @@ public class FracCalc {
     public static String produceAnswer(String input) { 
         // TODO: Implement this function to produce the solution to the input
         String[] splitEx = input.split(" ");
-        String result = "";
-        if (splitEx[1].equals("+")) {
-        	result = simplify(add(fracNumbers(splitEx)));
-        } else if (splitEx[1].equals("-")) {
-        	result = simplify(subtract(fracNumbers(splitEx)));
-        } else if (splitEx[1].equals("*")) {
-        	result = simplify(multiply(fracNumbers(splitEx)));
-        } else {
-        	result = simplify(divide(fracNumbers(splitEx)));
+        if (splitEx.length < 3) {
+        	return "error";
         }
-		return result;
+        
+        int[] numbers = fracNumbers(splitEx);
+        int[] result;
+        if (splitEx[1].equals("+")) {
+        	result = add(numbers);
+        } else if (splitEx[1].equals("-")) {
+        	result = subtract(numbers);
+        } else if (splitEx[1].equals("*")) {
+        	result = multiply(numbers);
+        } else {
+        	result = divide(numbers);
+        }
+        return simplify(result);
     }
     
+//    public static int[] fracNumbers (String[] frac) {
+//    	int[] numAndDenoms = new int[frac.length + 1];
+//    	for (int i = 0; i < frac.length; i+=2){
+//        	System.out.println(Arrays.toString(frac));
+//        	//fraction processing
+//    		if (frac[i].indexOf("/") != -1) {
+//    			String[] splitFrac = frac[i].split("/");
+//    			//mixed num processing
+//    			if (splitFrac[0].indexOf("_") != -1) {
+//        			String[] mixedNumSplit = splitFrac[0].split("_");
+//        			if (mixedNumSplit.length < 2) {
+//        				return numAndDenoms;
+//        			}
+//        			int wholeNum = Integer.parseInt(mixedNumSplit[0]);
+//        			String[] splitMixedFrac = frac[i].split("/");
+//        			String numer = mixedNumSplit[1];
+//        			String denom = splitMixedFrac[1];
+//        			if (wholeNum < 0) {
+//            			splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) - Integer.parseInt(numer));
+//        			} else {
+//        				splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) + Integer.parseInt(numer));
+//    			
+//        			}
+//    			} 
+//    			numAndDenoms[i] = Integer.parseInt(splitFrac[0]);
+//    			numAndDenoms[i+1] = Integer.parseInt(splitFrac[1]);
+//    		} else {
+//    			numAndDenoms[i] = Integer.parseInt(frac[i]);
+//    			numAndDenoms[i+1] = 1;
+//    		}
+//    	}
+//    	System.out.println(Arrays.toString(numAndDenoms));
+//    	return numAndDenoms;
+//    }
+//    
     public static int[] fracNumbers (String[] frac) {
     	int[] numAndDenoms = new int[frac.length + 1];
     	for (int i = 0; i < frac.length; i+=2){
         	System.out.println(Arrays.toString(frac));
-    		if (frac[i].indexOf("/")!=-1) {
+        	//fraction processing
+    		if (frac[i].indexOf("/") != -1) {
     			String[] splitFrac = frac[i].split("/");
+    			//mixed num processing
     			if (splitFrac[0].indexOf("_") != -1) {
         			String[] mixedNumSplit = splitFrac[0].split("_");
+        			if (mixedNumSplit.length < 2) {
+        				return numAndDenoms;
+        			}
         			int wholeNum = Integer.parseInt(mixedNumSplit[0]);
         			String[] splitMixedFrac = frac[i].split("/");
         			String numer = mixedNumSplit[1];
@@ -61,7 +108,7 @@ public class FracCalc {
         				splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) + Integer.parseInt(numer));
     			
         			}
-    			}
+    			} 
     			numAndDenoms[i] = Integer.parseInt(splitFrac[0]);
     			numAndDenoms[i+1] = Integer.parseInt(splitFrac[1]);
     		} else {
@@ -102,7 +149,9 @@ public class FracCalc {
     	int denom1 = operands[1];
     	int numer2 = operands[2];
     	int denom2 = operands[3];
-    	int[] newFrac = {numer1 * numer2, denom1 * denom2};
+    	int newNumer = numer1 * numer2;
+    	int newDenom = denom1 * denom2;
+    	int[] newFrac = {newNumer, newDenom};
     	return newFrac;
     }
     
@@ -111,7 +160,12 @@ public class FracCalc {
     	int denom1 = operands[1];
     	int numer2 = operands[2];
     	int denom2 = operands[3];
-    	int[] newFrac = {numer1 * denom2, numer2 * denom1};
+    	int newNumer = numer1 * denom2;
+    	int newDenom = numer2 * denom1;
+    	if (denom2 == 0) {
+    		newDenom = 0;
+    	}
+    	int[] newFrac = {newNumer, newDenom};
     	System.out.println(Arrays.toString(newFrac));
     	return newFrac;
     }
@@ -125,6 +179,9 @@ public class FracCalc {
     			numer /= i;
     			denom /= i;
     		}
+    	}
+    	if (denom == 0) {
+    		return "Error: Cannot divide by 0";
     	}
     	if (denom == 1) {
     		return Integer.toString(numer);
