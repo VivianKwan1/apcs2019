@@ -50,6 +50,49 @@ public class FracCalc {
         return simplify(result);
     }
     
+    public static int[] fracNumbers (String[] frac) {
+    	int[] numAndDenoms = new int[frac.length + 1];
+    	for (int i = 0; i < frac.length; i+=2){
+        	System.out.println(Arrays.toString(frac));
+        	//fraction processing
+    		if (frac[i].indexOf("/") != -1) {
+    			String[] splitFrac = frac[i].split("/");
+    			System.out.println(Arrays.toString(splitFrac));
+    			if (!isInt(splitFrac[splitFrac.length - 1]) || splitFrac.length < 2) {
+        			System.out.println(Arrays.toString(splitFrac));
+
+    				return numAndDenoms;
+    			}
+    			//mixed num processing
+    			if (splitFrac[0].indexOf("_") != -1) {
+        			String[] mixedNumSplit = splitFrac[0].split("_");
+        			if (mixedNumSplit.length < 2 || !isInt(mixedNumSplit[0]) || !isInt(mixedNumSplit[1]) ) {
+        				return numAndDenoms;
+        			}
+        			int wholeNum = Integer.parseInt(mixedNumSplit[0]);
+        			String[] splitMixedFrac = frac[i].split("/");
+        			String numer = mixedNumSplit[1];
+        			String denom = splitMixedFrac[1];
+        			if (wholeNum < 0) {
+            			splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) - Integer.parseInt(numer));
+        			} else {
+        				splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) + Integer.parseInt(numer));
+    			
+        			}
+    			} 
+    			numAndDenoms[i] = Integer.parseInt(splitFrac[0]);
+    			numAndDenoms[i+1] = Integer.parseInt(splitFrac[1]);
+    		} else if (isInt(frac[i])){
+    			numAndDenoms[i] = Integer.parseInt(frac[i]);
+    			numAndDenoms[i+1] = 1;
+    		} else {
+    			return numAndDenoms;
+    		}
+    	}
+    	System.out.println(Arrays.toString(numAndDenoms));
+    	return numAndDenoms;
+    }
+    
 //    public static int[] fracNumbers (String[] frac) {
 //    	int[] numAndDenoms = new int[frac.length + 1];
 //    	for (int i = 0; i < frac.length; i+=2){
@@ -84,41 +127,6 @@ public class FracCalc {
 //    	System.out.println(Arrays.toString(numAndDenoms));
 //    	return numAndDenoms;
 //    }
-//    
-    public static int[] fracNumbers (String[] frac) {
-    	int[] numAndDenoms = new int[frac.length + 1];
-    	for (int i = 0; i < frac.length; i+=2){
-        	System.out.println(Arrays.toString(frac));
-        	//fraction processing
-    		if (frac[i].indexOf("/") != -1) {
-    			String[] splitFrac = frac[i].split("/");
-    			//mixed num processing
-    			if (splitFrac[0].indexOf("_") != -1) {
-        			String[] mixedNumSplit = splitFrac[0].split("_");
-        			if (mixedNumSplit.length < 2) {
-        				return numAndDenoms;
-        			}
-        			int wholeNum = Integer.parseInt(mixedNumSplit[0]);
-        			String[] splitMixedFrac = frac[i].split("/");
-        			String numer = mixedNumSplit[1];
-        			String denom = splitMixedFrac[1];
-        			if (wholeNum < 0) {
-            			splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) - Integer.parseInt(numer));
-        			} else {
-        				splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) + Integer.parseInt(numer));
-    			
-        			}
-    			} 
-    			numAndDenoms[i] = Integer.parseInt(splitFrac[0]);
-    			numAndDenoms[i+1] = Integer.parseInt(splitFrac[1]);
-    		} else {
-    			numAndDenoms[i] = Integer.parseInt(frac[i]);
-    			numAndDenoms[i+1] = 1;
-    		}
-    	}
-    	System.out.println(Arrays.toString(numAndDenoms));
-    	return numAndDenoms;
-    }
 
     public static int[] add (int[] operands) {
     	System.out.println("yes");
@@ -194,8 +202,17 @@ public class FracCalc {
     		return numer + "/" + Math.abs(denom);
     	}
     }
-    // TODO: Fill in the space below with any helper methods that you think you will need
-     
+    
+    public static boolean isInt(String num) {
+    	String[] integers = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+    	for (int i = 0; i < integers.length - 1; i++) {
+    		if (num.equals(integers[i])) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+         
 }
 
 /* initiate scanner
