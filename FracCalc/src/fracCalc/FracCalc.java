@@ -53,31 +53,34 @@ public class FracCalc {
     public static int[] fracNumbers (String[] frac) {
     	int[] numAndDenoms = new int[frac.length + 1];
     	for (int i = 0; i < frac.length; i+=2){
-        	System.out.println(Arrays.toString(frac));
+//        	System.out.println(Arrays.toString(frac));
         	//fraction processing
     		if (frac[i].indexOf("/") != -1) {
     			String[] splitFrac = frac[i].split("/");
     			System.out.println(Arrays.toString(splitFrac));
     			if (!isInt(splitFrac[splitFrac.length - 1]) || splitFrac.length < 2) {
         			System.out.println(Arrays.toString(splitFrac));
-
     				return numAndDenoms;
     			}
     			//mixed num processing
     			if (splitFrac[0].indexOf("_") != -1) {
+    				System.out.println(":/");
         			String[] mixedNumSplit = splitFrac[0].split("_");
         			if (mixedNumSplit.length < 2 || !isInt(mixedNumSplit[0]) || !isInt(mixedNumSplit[1]) ) {
-        				return numAndDenoms;
+        				
+            			System.out.println(Arrays.toString(splitFrac) + "yes");
+            			return numAndDenoms;
         			}
         			int wholeNum = Integer.parseInt(mixedNumSplit[0]);
         			String[] splitMixedFrac = frac[i].split("/");
         			String numer = mixedNumSplit[1];
         			String denom = splitMixedFrac[1];
         			if (wholeNum < 0) {
+        				
             			splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) - Integer.parseInt(numer));
         			} else {
         				splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) + Integer.parseInt(numer));
-    			
+    			    
         			}
     			} 
     			numAndDenoms[i] = Integer.parseInt(splitFrac[0]);
@@ -85,11 +88,13 @@ public class FracCalc {
     		} else if (isInt(frac[i])){
     			numAndDenoms[i] = Integer.parseInt(frac[i]);
     			numAndDenoms[i+1] = 1;
+    			System.out.println(Arrays.toString(numAndDenoms) + ":(");
     		} else {
+
     			return numAndDenoms;
     		}
     	}
-    	System.out.println(Arrays.toString(numAndDenoms));
+
     	return numAndDenoms;
     }
     
@@ -134,10 +139,18 @@ public class FracCalc {
     	int numer1 = operands[0];
     	int denom1 = operands[1];
     	int numer2 = operands[2];
-    	int denom2 = operands[3];	
-    	int commonDenom = denom1 * denom2;
+    	int denom2 = operands[3];
+    	int commonDenom;
+    	if (denom1 == 1) {
+    		commonDenom = denom2;
+    	} else if (denom2 == 1) {
+    		commonDenom = denom1;
+    	} else {
+    		commonDenom = denom1 * denom2;
+    	}
     	int numer = (denom2 * numer1) + (denom1 * numer2);
     	int[] newFrac = {numer, commonDenom};
+    	System.out.println(Arrays.toString(newFrac));
     	return newFrac;
     }
     
@@ -157,6 +170,7 @@ public class FracCalc {
     	int denom1 = operands[1];
     	int numer2 = operands[2];
     	int denom2 = operands[3];
+    	System.out.println(numer1 + denom1 + numer2 + denom2);
     	int newNumer = numer1 * numer2;
     	int newDenom = denom1 * denom2;
     	int[] newFrac = {newNumer, newDenom};
@@ -204,7 +218,7 @@ public class FracCalc {
     }
     
     public static boolean isInt(String num) {
-    	String[] integers = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+    	String[] integers = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9"};
     	for (int i = 0; i < integers.length - 1; i++) {
     		if (num.equals(integers[i])) {
     			return true;
