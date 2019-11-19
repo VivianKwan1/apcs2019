@@ -52,12 +52,13 @@ public class FracCalc {
     
     public static int[] fracNumbers (String[] frac) {
     	int[] numAndDenoms = new int[frac.length + 1];
-    	for (int i = 0; i < frac.length; i+=2){
-//        	System.out.println(Arrays.toString(frac));
+    	for (int i = 0; i < frac.length; i += 2){
+        	System.out.println(Arrays.toString(frac));
         	//fraction processing
     		if (frac[i].indexOf("/") != -1) {
     			String[] splitFrac = frac[i].split("/");
     			System.out.println(Arrays.toString(splitFrac));
+    			//frac error processing
     			if (!isInt(splitFrac[splitFrac.length - 1]) || splitFrac.length < 2) {
         			System.out.println(Arrays.toString(splitFrac));
     				return numAndDenoms;
@@ -66,17 +67,18 @@ public class FracCalc {
     			if (splitFrac[0].indexOf("_") != -1) {
     				System.out.println(":/");
         			String[] mixedNumSplit = splitFrac[0].split("_");
+        			//mixed num error processing
         			if (mixedNumSplit.length < 2 || !isInt(mixedNumSplit[0]) || !isInt(mixedNumSplit[1]) ) {
         				
             			System.out.println(Arrays.toString(splitFrac) + "yes");
             			return numAndDenoms;
         			}
         			int wholeNum = Integer.parseInt(mixedNumSplit[0]);
+        			//split numerator and denominator
         			String[] splitMixedFrac = frac[i].split("/");
         			String numer = mixedNumSplit[1];
         			String denom = splitMixedFrac[1];
         			if (wholeNum < 0) {
-        				
             			splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) - Integer.parseInt(numer));
         			} else {
         				splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) + Integer.parseInt(numer));
@@ -85,6 +87,7 @@ public class FracCalc {
     			} 
     			numAndDenoms[i] = Integer.parseInt(splitFrac[0]);
     			numAndDenoms[i+1] = Integer.parseInt(splitFrac[1]);
+    		//integer processing
     		} else if (isInt(frac[i])){
     			numAndDenoms[i] = Integer.parseInt(frac[i]);
     			numAndDenoms[i+1] = 1;
