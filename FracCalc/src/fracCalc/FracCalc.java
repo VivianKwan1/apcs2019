@@ -68,8 +68,8 @@ public class FracCalc {
     				System.out.println(":/");
         			String[] mixedNumSplit = splitFrac[0].split("_");
         			//mixed num error processing
-        			if (mixedNumSplit.length < 2 || !isInt(mixedNumSplit[0]) || !isInt(mixedNumSplit[1]) ) {
-        				
+        			System.out.println(Arrays.toString(mixedNumSplit));
+        			if (mixedNumSplit.length < 2 || !isInt(mixedNumSplit[1]) || mixedNumSplit[0].equals("") || mixedNumSplit[1].equals("")) {
             			System.out.println(Arrays.toString(splitFrac) + "yes");
             			return numAndDenoms;
         			}
@@ -92,15 +92,16 @@ public class FracCalc {
     			numAndDenoms[i] = Integer.parseInt(frac[i]);
     			numAndDenoms[i+1] = 1;
     			System.out.println(Arrays.toString(numAndDenoms) + ":(");
+    		//
     		} else {
-
+    			System.out.println(":|");
     			return numAndDenoms;
     		}
     	}
 
     	return numAndDenoms;
     }
-    
+//    
 //    public static int[] fracNumbers (String[] frac) {
 //    	int[] numAndDenoms = new int[frac.length + 1];
 //    	for (int i = 0; i < frac.length; i+=2){
@@ -135,10 +136,9 @@ public class FracCalc {
 //    	System.out.println(Arrays.toString(numAndDenoms));
 //    	return numAndDenoms;
 //    }
-
+    //add
     public static int[] add (int[] operands) {
-    	System.out.println("yes");
-
+    	System.out.println(Arrays.toString(operands) + "yes");
     	int numer1 = operands[0];
     	int denom1 = operands[1];
     	int numer2 = operands[2];
@@ -156,7 +156,7 @@ public class FracCalc {
     	System.out.println(Arrays.toString(newFrac));
     	return newFrac;
     }
-    
+    //subtract
     public static int[] subtract (int[] operands) {
     	int numer1 = operands[0];
     	int denom1 = operands[1];
@@ -167,7 +167,7 @@ public class FracCalc {
     	int[] newFrac = {numer, commonDenom};
     	return newFrac;
     }
-    
+    //multiply
     public static int[] multiply (int[] operands) {
     	int numer1 = operands[0];
     	int denom1 = operands[1];
@@ -179,7 +179,7 @@ public class FracCalc {
     	int[] newFrac = {newNumer, newDenom};
     	return newFrac;
     }
-    
+    //divide
     public static int[] divide (int[] operands) {
     	int numer1 = operands[0];
     	int denom1 = operands[1];
@@ -199,8 +199,10 @@ public class FracCalc {
     	int numer = impropFrac[0];
     	int denom = impropFrac[1];
     	int smallerNum = Math.min(Math.abs(numer), Math.abs(denom));
+    	//reduce
     	for (int i = smallerNum; i > 0; i--) {
     		if (numer % i == 0 && denom % i == 0) {
+    			System.out.println(i);
     			numer /= i;
     			denom /= i;
     		}
@@ -208,26 +210,42 @@ public class FracCalc {
     	if (denom == 0) {
     		return "Error: Cannot divide by 0";
     	}
+    	//negative denom check
+    	if(denom < 1) {
+    		denom /= -1;
+    		numer /= -1;
+    	}
+    	//checks int
     	if (denom == 1) {
     		return Integer.toString(numer);
+    	//checks reduce to whole num 
     	} else if (numer % denom == 0) {
     		return Integer.toString(numer/denom);
+    	//checks improp frac
     	} else if (Math.abs(numer) > Math.abs(denom)) {
     		System.out.println(numer + denom);
-    		return (numer/denom + "_" + Math.abs(numer%denom) + "/" + Math.abs(denom));
+    		return (numer/denom + "_" + Math.abs(numer%denom) + "/" + denom);
+    	//frac
     	} else {
-    		return numer + "/" + Math.abs(denom);
+    		return numer + "/" + denom;
     	}
     }
     
+    //checks int
     public static boolean isInt(String num) {
-    	String[] integers = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9"};
-    	for (int i = 0; i < integers.length - 1; i++) {
-    		if (num.equals(integers[i])) {
-    			return true;
-    		}
-    	}
-    	return false;
+//    	String[] integers = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9"};
+//    	for (int i = 0; i < integers.length - 1; i++) {
+//    		if (num.equals(integers[i])) {
+//    			return true;
+//    		}
+//    	}
+    	 try {
+             Integer.parseInt(num);
+             return true;
+         } catch (NumberFormatException e) {
+             return false;
+         }
+//    	return false;
     }
          
 }
