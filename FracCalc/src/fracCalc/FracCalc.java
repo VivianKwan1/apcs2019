@@ -49,7 +49,7 @@ public class FracCalc {
         }
         return simplify(result);
     }
-    
+    //splits into numerator and denominator for improp fracs to do operations
     public static int[] fracNumbers (String[] frac) {
     	int[] numAndDenoms = new int[frac.length + 1];
     	for (int i = 0; i < frac.length; i += 2){
@@ -73,11 +73,13 @@ public class FracCalc {
             			System.out.println(Arrays.toString(splitFrac) + "yes");
             			return numAndDenoms;
         			}
+        			//get whole num
         			int wholeNum = Integer.parseInt(mixedNumSplit[0]);
         			//split numerator and denominator
         			String[] splitMixedFrac = frac[i].split("/");
         			String numer = mixedNumSplit[1];
         			String denom = splitMixedFrac[1];
+        			//set up improper fraction
         			if (wholeNum < 0) {
             			splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) - Integer.parseInt(numer));
         			} else {
@@ -92,7 +94,7 @@ public class FracCalc {
     			numAndDenoms[i] = Integer.parseInt(frac[i]);
     			numAndDenoms[i+1] = 1;
     			System.out.println(Arrays.toString(numAndDenoms) + ":(");
-    		//
+    		//idk what this is for
     		} else {
     			System.out.println(":|");
     			return numAndDenoms;
