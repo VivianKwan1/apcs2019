@@ -12,6 +12,7 @@ public class FracCalc {
         	String expression = input.nextLine();
     		if (expression.equals("quit")) {
     			repeat = false;
+    		//manages error returns
     		} else if (!produceAnswer(expression).equals("error")){
     			System.out.println(produceAnswer(expression));
     		} else {
@@ -32,12 +33,14 @@ public class FracCalc {
     public static String produceAnswer(String input) { 
         // TODO: Implement this function to produce the solution to the input
         String[] splitEx = input.split(" ");
+        //check spacing issues/missing operands or operator issues
         if (splitEx.length < 3) {
         	return "error";
         }
-        
+        //gets numerators and denominators for operands
         int[] numbers = fracNumbers(splitEx);
         int[] result;
+        //does operation
         if (splitEx[1].equals("+")) {
         	result = add(numbers);
         } else if (splitEx[1].equals("-")) {
@@ -47,6 +50,7 @@ public class FracCalc {
         } else {
         	result = divide(numbers);
         }
+        //simplifies result of operation and returns final answer
         return simplify(result);
     }
     //splits into numerator and denominator for improp fracs to do operations
@@ -79,7 +83,7 @@ public class FracCalc {
         			String[] splitMixedFrac = frac[i].split("/");
         			String numer = mixedNumSplit[1];
         			String denom = splitMixedFrac[1];
-        			//set up improper fraction
+        			//set up improper fraction numerator
         			if (wholeNum < 0) {
             			splitFrac[0] = Integer.toString(wholeNum * (Integer.parseInt(denom)) - Integer.parseInt(numer));
         			} else {
@@ -87,6 +91,7 @@ public class FracCalc {
     			    
         			}
     			} 
+    			//improper fraction put into returned array
     			numAndDenoms[i] = Integer.parseInt(splitFrac[0]);
     			numAndDenoms[i+1] = Integer.parseInt(splitFrac[1]);
     		//integer processing
