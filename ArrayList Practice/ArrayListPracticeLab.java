@@ -128,6 +128,11 @@ public class ArrayListPracticeLab
 	{
 		// Declare an ArrayList of String named myList.  Then fill it with: "this", "is", "it".  Print myList using printMe().
 		ArrayList<String> myList = new ArrayList<String>();
+		myList.add("this");
+		myList.add("is");
+		myList.add("it");
+		printMe(myList);
+		
 		
 		
 		
@@ -143,7 +148,9 @@ public class ArrayListPracticeLab
 		String[] test_max_2 = {"Only one really long string"};
 		String[] test_max_3 = {};
 		
-		//printMe( maxLength( convertArrayToList(test_max_1) ) );
+		System.out.print(maxLength(convertArrayToList(test_max_1)));
+		System.out.print(maxLength(convertArrayToList(test_max_2)));
+		System.out.print(maxLength(convertArrayToList(test_max_3)));
 		
 		
 		
@@ -159,8 +166,12 @@ public class ArrayListPracticeLab
 		String[] test_swap_2 = {"I", "love", "programming!"};
 		String[] test_swap_3 = {"don't move me"};
 		String[] test_swap_4 = {};
-
 		
+		System.out.print(swapPairs(convertArrayToList(test_swap_1)));
+		System.out.print(swapPairs(convertArrayToList(test_swap_2)));
+		System.out.print(swapPairs(convertArrayToList(test_swap_3)));
+		System.out.print(swapPairs(convertArrayToList(test_swap_4)));
+
 		
 
 		// To test your removeEvenLength method, convert the following to ArrayLists of Strings and 
@@ -173,7 +184,10 @@ public class ArrayListPracticeLab
 		String[] test_rem_2 = {"Did", "you", "solve", "it", "or", "what?"};
 		String[] test_rem_3 = {};
 				
-		
+		System.out.print(removeEvenLength(convertArrayToList(test_rem_1)));
+		System.out.print(removeEvenLength(convertArrayToList(test_rem_2)));
+		System.out.print(removeEvenLength(convertArrayToList(test_rem_3)));
+
 		
 		
 		// To test your doubleList method, convert the following to ArrayLists of Strings and 
@@ -186,6 +200,10 @@ public class ArrayListPracticeLab
 		String[] test_doub_2 = {"One string only"};		
 		String[] test_doub_3 = {};		
 		
+		System.out.print(doubleList(convertArrayToList(test_doub_1)));
+		System.out.print(doubleList(convertArrayToList(test_doub_2)));
+		System.out.print(doubleList(convertArrayToList(test_doub_3)));
+
 	}
 		
 		
