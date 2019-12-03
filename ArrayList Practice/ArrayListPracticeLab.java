@@ -1,3 +1,8 @@
+//Vivian Kwan
+//APCS Period 3
+//November 25, 2019
+//practice with arraylists
+
 import java.util.ArrayList;
 
 public class ArrayListPracticeLab 
