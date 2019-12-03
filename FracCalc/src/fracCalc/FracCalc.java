@@ -1,3 +1,8 @@
+//Vivian Kwan
+//APCS Period 3
+//October 29, 2019
+//does basic operations with fractions
+
 package fracCalc;
 import java.util.*;
 
@@ -34,7 +39,7 @@ public class FracCalc {
         // TODO: Implement this function to produce the solution to the input
         String[] splitEx = input.split(" ");
         //check spacing issues/missing operands or operator issues
-        if (splitEx.length < 3) {
+        if (errorScanning(splitEx)) {
         	return "error";
         }
         //gets numerators and denominators for operands
@@ -52,6 +57,22 @@ public class FracCalc {
         }
         //simplifies result of operation and returns final answer
         return simplify(result);
+    }
+    //check for short expressions and some invalid expressions
+    public static boolean errorScanning(String[] splitEx) {
+    	boolean valid = true;
+    	for(int i = 0; i < splitEx.length - 1; i++) {
+    		for(int j = 0; j < splitEx[i].length(); j++) {
+    			char c = splitEx[i].charAt(j);
+    			if (!(c <= 'A' && c >= 'Z') && !(c <= 'a' && c >= 'z')) {
+    				valid = false;
+    			}
+    		}
+    	}
+    	if (splitEx.length < 3) {
+    		valid = false;
+    	}
+    	return valid;
     }
     //splits into numerator and denominator for improp fracs to do operations
     public static int[] fracNumbers (String[] frac) {
@@ -215,7 +236,7 @@ public class FracCalc {
     		}
     	}
     	if (denom == 0) {
-    		return "Error: Cannot divide by 0";
+    		return "Invalid expression.";
     	}
     	//negative denom check
     	if(denom < 1) {
