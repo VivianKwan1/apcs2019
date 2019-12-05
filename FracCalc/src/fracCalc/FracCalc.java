@@ -39,7 +39,7 @@ public class FracCalc {
         // TODO: Implement this function to produce the solution to the input
         String[] splitEx = input.split(" ");
         //check spacing issues/missing operands or operator issues
-        if (errorScanning(splitEx)) {
+        if (!errorScanning(splitEx)) {
         	return "error";
         }
         //gets numerators and denominators for operands
@@ -61,14 +61,17 @@ public class FracCalc {
     //check for short expressions and some invalid expressions
     public static boolean errorScanning(String[] splitEx) {
     	boolean valid = true;
+    	//checks if alphabetical
     	for(int i = 0; i < splitEx.length - 1; i++) {
     		for(int j = 0; j < splitEx[i].length(); j++) {
     			char c = splitEx[i].charAt(j);
-    			if (!(c <= 'A' && c >= 'Z') && !(c <= 'a' && c >= 'z')) {
+    			if (c >= 'A' && c <= 'z') {
+    				System.out.println("nope");
     				valid = false;
     			}
     		}
     	}
+    	//checks if not enough spacing
     	if (splitEx.length < 3) {
     		valid = false;
     	}
@@ -94,6 +97,7 @@ public class FracCalc {
         			String[] mixedNumSplit = splitFrac[0].split("_");
         			//mixed num error processing
         			System.out.println(Arrays.toString(mixedNumSplit));
+        			//checks for invalid mixed num format
         			if (mixedNumSplit.length < 2 || !isInt(mixedNumSplit[1]) || mixedNumSplit[0].equals("") || mixedNumSplit[1].equals("")) {
             			System.out.println(Arrays.toString(splitFrac) + "yes");
             			return numAndDenoms;
@@ -172,13 +176,13 @@ public class FracCalc {
     	int numer2 = operands[2];
     	int denom2 = operands[3];
     	int commonDenom;
-    	if (denom1 == 1) {
-    		commonDenom = denom2;
-    	} else if (denom2 == 1) {
-    		commonDenom = denom1;
-    	} else {
+//    	if (denom1 == 1) {
+//    		commonDenom = denom2;
+//    	} else if (denom2 == 1) {
+//    		commonDenom = denom1;
+//    	} else {
     		commonDenom = denom1 * denom2;
-    	}
+//    	}
     	int numer = (denom2 * numer1) + (denom1 * numer2);
     	int[] newFrac = {numer, commonDenom};
     	System.out.println(Arrays.toString(newFrac));
